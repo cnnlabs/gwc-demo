@@ -50,10 +50,10 @@ def get_welcome_response():
 
     session_attributes = {}
     card_title = "Welcome, Girls Who Code"
-    speech_output = "<speak>Hello - welcome Girls Who Code, to CNN. <break time='0.5s'/> an-cay ou-yay eak-spay ig-pay atin-lay?</speak>"
+    speech_output = "<speak>Hello - welcome to CNN, Girls Who Code. <break time='0.5s'/> an-cay ou-yay eak-spay ig-pay atin-lay?</speak>"
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
-    reprompt_text = "<speak>haaa haaaa, you don't speak Pig Latin I guess... Say anything, and I will translate for you!</speak>"
+    reprompt_text = "haaa haaaa, you don't speak Pig Latin I guess... Say anything, and I will translate for you!"
     should_end_session = False
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
@@ -61,7 +61,7 @@ def get_welcome_response():
 
 def handle_session_end_request():
     card_title = "Goodbye, let's play again soon!"
-    speech_output = "oodbyegay, et'slay ayplay againway oonsay! "
+    speech_output = "<speak>oodbyegay, et'slay ayplay againway oonsay!</speak> "
     # Setting this to true ends the session and exits the skill.
     should_end_session = True
     return build_response({}, build_speechlet_response(
@@ -86,10 +86,10 @@ def translate_pig_latin(intent, session):
                         "<break time='2s'/>" + \
                         translator(phrase) + \
                         ". Tell me another phrase </speak> "
-        reprompt_text = "<speak>Say another phrase if you want me to translate it</speak> " 
+        reprompt_text = "Say another phrase if you want me to translate it "
     else:
         speech_output = "<speak>I'm sorry I didn't get that. Can you say it again?</speak>"
-        reprompt_text = "<speak>I don't understand. What did you say?</speak>"
+        reprompt_text = "I don't understand. What did you say?"
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
 
@@ -105,7 +105,6 @@ def translator(phrase):
                         phrase[k] = i+'ay'
                 elif t(i) in lst:
                         phrase[k] = i[2:]+i[:2]+'ay'
-                        print(phrase[k])
                 elif i.isalpha() == False:
                         phrase[k] = i
                 else:
